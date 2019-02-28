@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2018 The Merge developers
+// Copyright (c) 2019 The Merge developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1896,9 +1896,9 @@ Value settxfee(const Array& params, bool fHelp)
 
     // Amount
     CAmount nAmount = 0;
-    if (params[0].get_real() != 0.0)
+    if (params[0].get_real() != 0.0) {
         nAmount = AmountFromValue(params[0]); // rejects 0.0 amounts
-
+	} else throw runtime_error("Invalid parameter. The TX Fee must be a value larger than 0");
     payTxFee = CFeeRate(nAmount, 1000);
     return true;
 }
